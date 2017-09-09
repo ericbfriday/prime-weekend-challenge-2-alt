@@ -4,6 +4,7 @@ function onReady() {
     console.log('JQ & JS ready!');
     $("#submitButton").on('click', personMaker);
     $("#submitButton").on('click', personGetter);
+    personGetter();
     // peopleAppender(people);
 } // end onReady()
 
