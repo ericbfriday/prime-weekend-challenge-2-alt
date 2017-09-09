@@ -2,32 +2,43 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- script sourcing is below -->
-        <script src="vendors/jquery-3.2.1.min.js"></script>
-        <script src="vendors/bootstrap.min.js"></script>
-        <script src="scripts/client.js"></script>
-        <link rel="stylesheet" href="styles/bootstrap.css">
-        <link rel="stylesheet" href="styles/styles.css">
-    </head>
-    <header>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-    </header>
-    <main>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>People Lister</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- script sourcing is below -->
+    <script src="vendors/jquery-3.2.1.min.js"></script>
+    <script src="vendors/bootstrap.min.js"></script>
+    <script src="scripts/client.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<header>
+    <h1>People Lister</h1>
+</header>
+<main>
+
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
+        <div id="inputs">
+            <p>Name: <input type="text" placeholder="Name" id="name"></p>
+            <p>Facts: <input type="text" placeholder="Facts" id="facts"></p>
+            <p><button id="submitButton">Add Person</button></p>
+        </div>
+        <div id="nameList">
+            <p>
+
+            </p>
+        </div>
     </body>
-    </main>
-    <footer>
-        
-    </footer>
+</main>
+<footer>
+
+</footer>
+
 </html>
