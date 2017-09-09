@@ -16,6 +16,13 @@ app.get('/', function(req, res) {
     res.sendFile(indexPath);
 });
 
+app.post('/person', function(req, res) {
+    console.log('inside server.js /person node');
+    console.log(req.body);
+    
+    // res.send(person);
+});
+
 // app.get('/person', function(req, res) {
     
 // });
