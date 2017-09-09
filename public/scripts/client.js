@@ -21,7 +21,7 @@ function personMaker() {
         url: '/person',
         data: aPerson,
         success: function (serverResp) {
-            console.log('client.js /person is logging ' + serverResp);
+            // console.log('client.js /person is logging ' + serverResp);
             peopleAppender(serverResp);
         }
     });
@@ -35,7 +35,7 @@ function personGetter() {
         type: 'GET',
         url: '/person',
         success: function (serverResp) {
-            console.log('client.js /person is logging serverResp ' + serverResp);
+            console.log('client.js /person is logging serverResp ', serverResp);
             peopleAppender(serverResp);
         }
     });

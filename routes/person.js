@@ -18,18 +18,17 @@ router.post('/', function(req, res) {
     };
     var personName = req.body.name;
     var personFacts = req.body.facts;
-    console.log('logging person ' + person);
+    console.log('logging person in POST route hit: ', person);
     
     people.push(person);
-    // testing below
+    // testing below -- The two below work
     // console.log('logging req.body.name ' + req.body.name);
     // console.log('logging req.body.facts ' + req.body.facts);
-    console.log('logging person ' + req.body.person);
-    console.log('person.js is now logging people: ' + people);
+    console.log('logging people in POST route hit: ', people);
 });
 
 router.get('/', function(req, res) {
-    console.log('inside router.get"/" GET function');
+    // console.log('inside router.get"/" GET function');
     res.send(people);
 });
 
