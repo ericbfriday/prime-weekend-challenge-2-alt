@@ -4,7 +4,7 @@ var path = require('path');
 var router = express.Router();
 
 // GET method route
-app.post('/person', function (req, res) {
+app.get('/person', function (req, res) {
     console.log('inside the person.js GET route');
     console.log(req.body.data);
   });

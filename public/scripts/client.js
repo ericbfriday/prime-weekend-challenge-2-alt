@@ -3,25 +3,27 @@ $(document).ready(onReady);
 function onReady() {
     console.log('JQ & JS ready!');
     $("#submitButton").on('click', personMaker);
-    peopleAppender(people);
+    // peopleAppender(people);
 }
 
 
-var people = []; // just using this for front end testing purposes
+// var people = []; // just using this for front end testing purposes
 
 function personMaker() {
     var aPerson = {name: $('#name').val(), facts: $('#facts').val()};
-    people.push(aPerson); // just using this for front end testing purposes
-    console.log($('#name').val() + ' pushed into array "people"'); // just using this for front end testing purposes
+    // people.push(aPerson); // just using this for front end testing purposes
+    // console.log($('#name').val() + ' pushed into array "people"'); // just using this for front end testing purposes
     $.ajax({
         type: 'POST',
-        url: '/person',
+        url: '/peopleMover',
         data: aPerson, // data hold value we want to send
         success: function(serverResp) {
-            console.log(serverResp);
+            console.log('peopleMaker is logging ' + serverResp);
+            var people = serverResp;
+            // return people;
+            peopleAppender(people);
         }
     });
-    peopleAppender(people);
 }
 
 function peopleAppender(peopleArray) {

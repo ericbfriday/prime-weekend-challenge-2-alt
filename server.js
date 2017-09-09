@@ -6,6 +6,8 @@ var port = 5000;
 var person = require('./routes/person');
 var router = express.Router();
 
+var people = [];
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/person', router);
@@ -16,16 +18,20 @@ app.get('/', function(req, res) {
     res.sendFile(indexPath);
 });
 
-app.post('/person', function(req, res) {
-    console.log('inside server.js /person node');
-    console.log(req.body);
-    
-    // res.send(person);
+app.post('/peopleMover', function(req, res) {
+    console.log('inside server.js /peopleMover node');
+    // console.log(req.body);
+    people.push(req.body);
+    console.log('server.js peopleMover is logging ' + people);
+    // individual = person(req.body);
+    // peopleArray = {data: people};
+    res.send(people);
+    // res.sendStatus(200);
 });
 
-// app.get('/person', function(req, res) {
-    
-// });
+app.get('/peopleReturner', function(){
+    res.send(people);
+});
 
 app.listen(port, function() {
     console.log('listening on ' + port);
