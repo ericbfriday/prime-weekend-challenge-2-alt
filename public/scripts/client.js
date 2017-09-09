@@ -3,32 +3,47 @@ $(document).ready(onReady);
 function onReady() {
     console.log('JQ & JS ready!');
     $("#submitButton").on('click', personMaker);
+    $("#submitButton").on('click', personGetter);
     // peopleAppender(people);
-}
+} // end onReady()
 
-
-// var people = []; // just using this for front end testing purposes
+// function routerTester() {
+//     console.log('routerTester ACTIVATED!');
+// }
 
 function personMaker() {
-    var aPerson = {name: $('#name').val(), facts: $('#facts').val()};
-    // people.push(aPerson); // just using this for front end testing purposes
-    // console.log($('#name').val() + ' pushed into array "people"'); // just using this for front end testing purposes
+    var aPerson = {
+        name: $('#name').val(),
+        facts: $('#facts').val()
+    };
     $.ajax({
         type: 'POST',
-        url: '/peopleMover',
-        data: aPerson, // data hold value we want to send
-        success: function(serverResp) {
-            console.log('peopleMaker is logging ' + serverResp);
-            var people = serverResp;
-            // return people;
-            peopleAppender(people);
+        url: '/person',
+        data: aPerson,
+        success: function (serverResp) {
+            console.log('client.js /person is logging ' + serverResp);
+            peopleAppender(serverResp);
+        }
+    });
+    // resetting value fields
+    $('#name').val("");
+    $('#facts').val("");
+} // end personMaker()
+
+function personGetter() {
+    $.ajax({
+        type: 'GET',
+        url: '/person',
+        success: function (serverResp) {
+            console.log('client.js /person is logging serverResp ' + serverResp);
+            peopleAppender(serverResp);
         }
     });
 }
 
 function peopleAppender(peopleArray) {
     $('#nameList').empty();
-    for (i=0; i < peopleArray.length; i++) {
+    for (i = 0; i < peopleArray.length; i++) {
         $('#nameList').append('<p>' + peopleArray[i].name + ': ' + peopleArray[i].facts);
     }
-}
+} // end peopleAppender()
