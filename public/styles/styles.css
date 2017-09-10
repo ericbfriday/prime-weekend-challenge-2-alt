@@ -1,8 +1,27 @@
 body {
     background-color: lightblue;
     font-family: Abhaya Libre;
+    margin: 10px 10px 10px 10px;
 }
 
 li {
     list-style: none;
+}
+
+.carouselButtonLeft {
+    float: left;
+}
+
+#carouselPlacement {
+    text-align: center;
+}
+
+.carouselButtonRight {
+    float: right;
+}
+
+#testCarousel {
+    overflow: hidden;
+    display: inline;
+    vertical-align: middle;
 }

@@ -54,12 +54,9 @@ function peopleAppender(peopleArray) {
         + ': ' 
         + peopleArray[i].facts 
         + '</div>');
-    }
-    // showDivs(peopleArray.length);
-    plusDivs(+1);
+    } // end updating carousel
+    plusDivs(+1); // use this to begin carousel upon first added element to array
 } // end peopleAppender()
-
-showDivs(slideIndex);
 
 function plusDivs(n) {
     showDivs(slideIndex += n);
