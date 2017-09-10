@@ -1,7 +1,7 @@
 $(document).ready(onReady);
 
 var slideIndex = 1;
-var clickCount = 0;
+var personID = 0;
 
 function onReady() {
     console.log('JQ & JS ready!');
@@ -38,18 +38,54 @@ function carouselCounterUpdate(peopleArray) {
       // end carouselCounterUpdate()
 }
 
+function deletePerson() {
+    console.log('Deleting Person');
+
+    console.log($(this).closest('div').data('name'));
+    
+    console.log($(this).closest('div').data('facts'));
+    
+    console.log($(this).closest('div').data('idnumber'));
+    // set var to equal clicked button's data value
+    var aPerson = {
+        name: $(this).closest('div').data('name'),
+        facts: $(this).closest('div').data('facts'),
+        idnumber: $(this).closest('div').data('idnumber'),
+        purpose: 'remove'
+    };
+    console.log(aPerson);
+
+    $.ajax({
+        type: 'POST',
+        url: '/person',
+        data: aPerson,
+        success: function (serverResp) {
+            peopleAppender(serverResp);
+        }
+    });
+
+    personGetter();
+}
+
 function peopleAppender(peopleArray) {
     // begin regular mode peopleAppender Function
     $('#nameList').empty();
     for (i = 0; i < peopleArray.length; i++) {
-        $('#nameList').append('<div class="regularList">' 
+        $('#nameList').append('<div class="regularList" data-idnumber="' 
+        + peopleArray[i].data 
+        + '" data-name="'
+        + peopleArray[i].name 
+        + '" data-facts="'
+        + peopleArray[i].facts        
+        +'">' 
         + peopleArray[i].name 
         + ': ' 
-        + peopleArray[i].facts);
+        + peopleArray[i].facts 
+        + '<button class="deleteButton btn btn-danger" style="float:right">Delete</button></div>');
     } // end regular mode peopleAppender Function
 
     carouselContentsUpdate(peopleArray);
-
+    $(".deleteButton").on('click', deletePerson);
     plusDivs(+1); // I use this to begin displaying carousel upon first added element to array,
                   // however it moves contents +1 position upon appending list
 } // end peopleAppender()
@@ -66,24 +102,25 @@ function personGetter() {
 } // end peopleGetter()
 
 function personMaker() {
-    clickCount++;
+    personID+= 1;
     var aPerson = {
         name: $('#name').val(),
         facts: $('#facts').val(),
-        data: clickCount
+        data: personID,
+        purpose: 'add'
     };
     $.ajax({
         type: 'POST',
         url: '/person',
         data: aPerson,
         success: function (serverResp) {
-            // console.log('client.js /person is logging ' + serverResp);
             peopleAppender(serverResp);
         }
     });
     // resetting value fields
     $('#name').val("");
     $('#facts').val("");
+    return personID;
 } // end personMaker()
 
 function plusDivs(n) {

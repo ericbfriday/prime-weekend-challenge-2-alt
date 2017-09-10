@@ -6,7 +6,11 @@ var people = [];
 
 router.use(bodyParser.urlencoded({extended: true}));
 
-// personID = 0; // only needed for pro mode
+// create if loop to run adding function vs removing function based on person.purpose
+// this should be inside of post function, as both POST functions send same basic request type
+// if add, then people.push purpose
+// if remove, then run remove function. 
+
 
 // person function to run inside server
 router.post('/', function(req, res) {
@@ -15,16 +19,32 @@ router.post('/', function(req, res) {
     var person = {
         name: req.body.name,
         facts: req.body.facts,
-        data: req.body.data
+        idnumber: req.body.idnumber,
+        purpose: req.body.purpose
     };
 
     var personName = req.body.name;
     var personFacts = req.body.facts;
-    var personID = req.body.data;
+    var personID = req.body.idnumber;
+    var personPurpose = req.body.purpose;
 
     console.log('logging person in POST route hit: ', person);
 
-    people.push(person);
+    if (person.purpose == 'add') {
+        people.push(person);
+    }
+
+    else if (person.purpose == 'remove') {
+        var newPeople = _.without(people, person.idnumber);
+        console.log(newPeople);
+        res.send(newPeople);
+    }
+
+    else {
+        console.log('Invalid Person Object handled inside person.js');
+        
+    }
+
     // testing below -- The two below work
     // console.log('logging req.body.name ' + req.body.name);
     // console.log('logging req.body.facts ' + req.body.facts);
