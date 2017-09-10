@@ -1,6 +1,8 @@
 $(document).ready(onReady);
 
 var slideIndex = 1;
+var clickCount = 0;
+var testingArray = [1,2,3,4,5,6,7,8];
 
 function onReady() {
     console.log('JQ & JS ready!');
@@ -9,10 +11,84 @@ function onReady() {
     personGetter();
 } // end onReady()
 
+// function carouselCounter(peopleArray) {
+//     var length = parseInt(peopleArray.length);
+//     console.log('Logging length in carouselCounter: ' + length);
+//     var personPosition = (parseInt(peopleArray.indexOf(targetPerson + 1)));
+//     console.log('Logging position in carouselCounter: ' + personPosition);
+//     var targetPerson = person.data('id');//make this be return from logic;
+//     console.log('Logging target in carouselCounter: ' + targetPerson);
+
+//     for ( var i = 0; i < peopleArray.length; i++ ) {
+//         if ( targetPerson == personPosition ) {
+//             $("#currentPerson").html(personPositon);
+//         }
+//     } // end for loop
+
+//     $("#totalPeople").html('' + length);
+// } // end carouselCounter()
+
+function carouselContentsUpdate(peopleArray) {
+        // updating carousel contents
+        $('#carouselPlacement').empty();
+        for (var i = 0; i < peopleArray.length; i++) {
+            $('#carouselPlacement').append('<div class="carouselCurrent">' 
+            + peopleArray[i].name 
+            + ': ' 
+            + peopleArray[i].facts 
+            + '</div>');
+        } // end updating carousel contents
+}
+
+function carouselCounterUpdate(peopleArray) {
+    // updating carousel nav buttons
+    $('#carouselCounter').empty();
+    for (var i = 0; i < peopleArray.length; i++) {
+        $('#carouselCounter').append('<button class="carouselIndexButton"'// onclick="currentDiv(' 
+        + (i + 1) 
+        + ')" style= "display: inline">' 
+        + (i + 1) 
+        + '</button>'); 
+    // end updating carousel nav buttons
+    } 
+      // end carouselCounterUpdate()
+}
+
+function peopleAppender(peopleArray) {
+    var buttonNumber = document.getElementsByClassName("carouselIndexButton");
+    // begin regular mode peopleAppender Function
+    $('#nameList').empty();
+    for (i = 0; i < peopleArray.length; i++) {
+        $('#nameList').append('<div class="regularList">' 
+        + peopleArray[i].name 
+        + ': ' 
+        + peopleArray[i].facts);
+    } // end regular mode peopleAppender Function
+
+    carouselContentsUpdate(peopleArray);
+    carouselCounterUpdate(peopleArray); // updates and appends carousel buttons
+    showDivs(buttonNumber);
+    plusDivs(+1); // use this to begin displaying carousel upon first added element to array,
+                 // however it moves contents to +1 position upon appending list
+} // end peopleAppender()
+
+function personGetter() {
+    $.ajax({
+        type: 'GET',
+        url: '/person',
+        success: function (serverResp) {
+            console.log('client.js /person is logging serverResp ', serverResp);
+            peopleAppender(serverResp);
+        }
+    });
+}
+
 function personMaker() {
+    clickCount++;
     var aPerson = {
         name: $('#name').val(),
-        facts: $('#facts').val()
+        facts: $('#facts').val(),
+        data: clickCount
     };
     $.ajax({
         type: 'POST',
@@ -27,36 +103,6 @@ function personMaker() {
     $('#name').val("");
     $('#facts').val("");
 } // end personMaker()
-
-function personGetter() {
-    $.ajax({
-        type: 'GET',
-        url: '/person',
-        success: function (serverResp) {
-            console.log('client.js /person is logging serverResp ', serverResp);
-            peopleAppender(serverResp);
-        }
-    });
-}
-
-function peopleAppender(peopleArray) {
-    // begin regular mode peopleAppender Function
-    $('#nameList').empty();
-    for (i = 0; i < peopleArray.length; i++) {
-        $('#nameList').append('<div class="regularList">' + peopleArray[i].name + ': ' + peopleArray[i].facts);
-    } // end regular mode peopleAppender Function
-
-    // updating carousel
-    $('#carouselPlacement').empty();
-    for (var i = 0; i < peopleArray.length; i++) {
-        $('#carouselPlacement').append('<div class="carouselCurrent">' 
-        + peopleArray[i].name 
-        + ': ' 
-        + peopleArray[i].facts 
-        + '</div>');
-    } // end updating carousel
-    plusDivs(+1); // use this to begin carousel upon first added element to array
-} // end peopleAppender()
 
 function plusDivs(n) {
     showDivs(slideIndex += n);

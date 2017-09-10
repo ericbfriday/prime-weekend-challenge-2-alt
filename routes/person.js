@@ -14,12 +14,16 @@ router.post('/', function(req, res) {
     // console.log('inside person.js POST function');
     var person = {
         name: req.body.name,
-        facts: req.body.facts
+        facts: req.body.facts,
+        data: req.body.data
     };
+
     var personName = req.body.name;
     var personFacts = req.body.facts;
+    var personID = req.body.data;
+
     console.log('logging person in POST route hit: ', person);
-    
+
     people.push(person);
     // testing below -- The two below work
     // console.log('logging req.body.name ' + req.body.name);

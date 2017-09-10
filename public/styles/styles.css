@@ -25,3 +25,12 @@ li {
     display: inline;
     vertical-align: middle;
 }
+
+.carouselIndexButton:hover {
+    background-color: darkslategray;
+    color: white;
+}
+
+#carouselCounter {
+    text-align: center;
+}
