@@ -1,16 +1,13 @@
 $(document).ready(onReady);
 
+var slideIndex = 1;
+
 function onReady() {
     console.log('JQ & JS ready!');
     $("#submitButton").on('click', personMaker);
     $("#submitButton").on('click', personGetter);
     personGetter();
-    // peopleAppender(people);
 } // end onReady()
-
-// function routerTester() {
-//     console.log('routerTester ACTIVATED!');
-// }
 
 function personMaker() {
     var aPerson = {
@@ -43,8 +40,37 @@ function personGetter() {
 }
 
 function peopleAppender(peopleArray) {
+    // begin regular mode peopleAppender Function
     $('#nameList').empty();
     for (i = 0; i < peopleArray.length; i++) {
-        $('#nameList').append('<p>' + peopleArray[i].name + ': ' + peopleArray[i].facts);
+        $('#nameList').append('<div class="regularList">' + peopleArray[i].name + ': ' + peopleArray[i].facts);
+    } // end regular mode peopleAppender Function
+
+    // updating carousel
+    $('#carouselPlacement').empty();
+    for (var i = 0; i < peopleArray.length; i++) {
+        $('#carouselPlacement').append('<div class="carouselCurrent">' 
+        + peopleArray[i].name 
+        + ': ' 
+        + peopleArray[i].facts 
+        + '</div>');
     }
+    // showDivs(peopleArray.length);
+    plusDivs(+1);
 } // end peopleAppender()
+
+showDivs(slideIndex);
+
+function plusDivs(n) {
+    showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+    var x = document.getElementsByClassName("carouselCurrent");
+    if (n > x.length) {slideIndex = 1;} 
+    if (n < 1) {slideIndex = x.length;}
+    for (var i = 0; i < x.length; i++) {
+        x[i].style.display = "none"; 
+    }
+    x[slideIndex-1].style.display = "block"; 
+}

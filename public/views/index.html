@@ -15,27 +15,44 @@
     <!-- script sourcing is below -->
     <script src="vendors/jquery-3.2.1.min.js"></script>
     <script src="vendors/bootstrap.min.js"></script>
+    <script src="slick/slick.min.js"></script>
     <script src="scripts/client.js"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="styles/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/slick-theme.css"/>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
+
 <header>
     <h1>People Lister</h1>
 </header>
+
 <main>
+
     <body>
         <div id="inputs">
             <p>Name: <input type="text" placeholder="Name" id="name"></p>
             <p>Facts: <input type="text" placeholder="Facts" id="facts"></p>
             <p><button id="submitButton">Add Person</button></p>
         </div>
-        <div id="nameList">
-            <p>
+        <hr>
 
-            </p>
+        <div id="nameList">
+            <p></p>
         </div>
+        <hr>
+
+        <div id="testCarousel">
+            <p><span id="carouselTitle">Carousel (hit next to begin carousel)</span></p>
+            <button class="carouselButton carouselButtonLeft" onclick="plusDivs(-1)">&#10094; Previous</button>
+            <div id="carouselPlacement"></div>
+            <button class="carouselButton carouselButtonRight" onclick="plusDivs(+1)">Next &#10095;</button>
+        </div>
+
     </body>
+
+
 </main>
 <footer>
 

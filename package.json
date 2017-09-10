@@ -5,7 +5,8 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "slick-carousel": "^1.7.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -29,6 +29,8 @@ router.post('/', function(req, res) {
 
 router.get('/', function(req, res) {
     // console.log('inside router.get"/" GET function');
+    console.log('logging nothing in GET route hit: ');
+    
     res.send(people);
 });
 

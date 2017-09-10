@@ -2,3 +2,7 @@ body {
     background-color: lightblue;
     font-family: Abhaya Libre;
 }
+
+li {
+    list-style: none;
+}
