@@ -34,3 +34,7 @@ li {
 #carouselCounter {
     text-align: center;
 }
+
+.regularList {
+    height: 4em;
+}

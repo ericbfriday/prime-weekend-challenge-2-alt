@@ -40,17 +40,14 @@ function carouselCounterUpdate(peopleArray) {
 
 function deletePerson() {
     console.log('Deleting Person');
-
     console.log($(this).closest('div').data('name'));
-    
     console.log($(this).closest('div').data('facts'));
-    
-    console.log($(this).closest('div').data('idnumber'));
-    // set var to equal clicked button's data value
+    console.log($(this).closest('div').data('uniqueid'));
+    // set var to equal clicked button's data valuenp
     var aPerson = {
         name: $(this).closest('div').data('name'),
         facts: $(this).closest('div').data('facts'),
-        idnumber: $(this).closest('div').data('idnumber'),
+        idnumber: $(this).closest('div').data('uniqueid'),
         purpose: 'remove'
     };
     console.log(aPerson);
@@ -58,7 +55,7 @@ function deletePerson() {
     $.ajax({
         type: 'POST',
         url: '/person',
-        data: aPerson,
+        idnumber: aPerson,
         success: function (serverResp) {
             peopleAppender(serverResp);
         }
@@ -71,12 +68,12 @@ function peopleAppender(peopleArray) {
     // begin regular mode peopleAppender Function
     $('#nameList').empty();
     for (i = 0; i < peopleArray.length; i++) {
-        $('#nameList').append('<div class="regularList" data-idnumber="' 
-        + peopleArray[i].data 
-        + '" data-name="'
+        $('#nameList').append('<div class="regularList" data-name="'
         + peopleArray[i].name 
         + '" data-facts="'
         + peopleArray[i].facts        
+        +'" data-uniqueid="' 
+        + peopleArray[i].data
         +'">' 
         + peopleArray[i].name 
         + ': ' 
@@ -109,6 +106,7 @@ function personMaker() {
         data: personID,
         purpose: 'add'
     };
+    console.log(personID)
     $.ajax({
         type: 'POST',
         url: '/person',
@@ -120,7 +118,6 @@ function personMaker() {
     // resetting value fields
     $('#name').val("");
     $('#facts').val("");
-    return personID;
 } // end personMaker()
 
 function plusDivs(n) {
