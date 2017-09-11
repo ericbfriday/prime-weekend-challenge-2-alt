@@ -32,27 +32,29 @@ router.post('/', function(req, res) {
     }
 
     else if (person.purpose == 'remove') {
+
         console.log('logging person in remove function ', person);
         
+        people.splice( people.indexOf(person.idNumber));
+
         for (var i = 0; i <people.length; i++) {
-            if (people[i].purpose == 'remove') {
-                people.pop(people[i]);
-            }
-            else if (people[i].idNumber == person.idNumber) {
-                people.pop(people[i]);
+            if (person.idNumber == people[i].idNumber) {
+                people.splice(i,1);
+                console.log('spliced person');
             }
         }
+    }
+
+    else {
+        console.log('Invalid Person Object handled inside person.js');
+    }
 
     //     people = people.filter(function(people) {
     //         return (people.idNumber != req.body.idNumber);
     //     });
     //     console.log(people);
     //     res.send(people);
-    }
 
-    else {
-        console.log('Invalid Person Object handled inside person.js');
-    }
 
     // testing below -- The two below work
     // console.log('logging req.body.name ' + req.body.name);
