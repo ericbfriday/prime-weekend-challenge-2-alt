@@ -6,7 +6,7 @@ var personID = 0;
 function onReady() {
     console.log('JQ & JS ready!');
     $("#submitButton").on('click', personMaker);
-    $("#submitButton").on('click', personGetter);
+    // $("#submitButton").on('click', personGetter);
     personGetter();
 } // end onReady()
 
@@ -37,7 +37,7 @@ function deletePerson() {
         idNumber: $(this).closest('div').data('uniqueid'),
         purpose: 'remove'
     };
-    
+
     console.log('logging aPerson within delete person before posting to /person', aPerson);
 
     $.ajax({
@@ -48,7 +48,7 @@ function deletePerson() {
             peopleAppender(serverResp);
         }
     });
-
+    console.log('running personGetter');
     personGetter();
 }
 
@@ -108,6 +108,7 @@ function personMaker() {
     // resetting value fields
     $('#name').val("");
     $('#facts').val("");
+    personGetter();
 } // end personMaker()
 
 function plusDivs(n) {
