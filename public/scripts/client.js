@@ -24,20 +24,7 @@ function carouselContentsUpdate(peopleArray) {
         } // end updating carousel contents
 }
 
-function carouselCounterUpdate(peopleArray) {
-    var currentButton = $('#carouselCounter').data();
-    // updating carousel nav buttons
-    $('#carouselCounter').empty();
-    for (var i = 0; i < peopleArray.length; i++) {
-        $('#carouselCounter').append('<button class="carouselIndexButton" data-buttonNumber="'
-        + (i + 1)
-        + '" style= "display: inline">' 
-        + (i + 1)
-        + '</button>'); 
-    } 
-      // end carouselCounterUpdate()
-}
-
+// vvv currently not working vvv
 function deletePerson() {
     console.log('Deleting Person');
     console.log($(this).closest('div').data('name'));
