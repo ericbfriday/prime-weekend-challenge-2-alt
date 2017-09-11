@@ -34,15 +34,16 @@ function deletePerson() {
     var aPerson = {
         name: $(this).closest('div').data('name'),
         facts: $(this).closest('div').data('facts'),
-        idnumber: $(this).closest('div').data('uniqueid'),
+        idNumber: $(this).closest('div').data('uniqueid'),
         purpose: 'remove'
     };
-    console.log(aPerson);
+    
+    console.log('logging aPerson within delete person before posting to /person', aPerson);
 
     $.ajax({
         type: 'POST',
         url: '/person',
-        idnumber: aPerson,
+        data: aPerson,
         success: function (serverResp) {
             peopleAppender(serverResp);
         }
@@ -59,8 +60,8 @@ function peopleAppender(peopleArray) {
         + peopleArray[i].name 
         + '" data-facts="'
         + peopleArray[i].facts        
-        +'" data-uniqueid="' 
-        + peopleArray[i].data
+        +'" data-uniqueid="person' 
+        + peopleArray[i].idNumber
         +'">' 
         + peopleArray[i].name 
         + ': ' 
@@ -79,7 +80,7 @@ function personGetter() {
         type: 'GET',
         url: '/person',
         success: function (serverResp) {
-            console.log('client.js /person is logging serverResp ', serverResp);
+            console.log('client.js /person personGetter is logging serverResp ', serverResp);
             peopleAppender(serverResp);
         }
     });
@@ -90,10 +91,12 @@ function personMaker() {
     var aPerson = {
         name: $('#name').val(),
         facts: $('#facts').val(),
-        data: personID,
+        idNumber: personID,
         purpose: 'add'
     };
-    console.log(personID)
+
+    console.log('logging personID in personMaker: ' + personID);
+    
     $.ajax({
         type: 'POST',
         url: '/person',

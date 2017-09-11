@@ -6,6 +6,7 @@ var people = [];
 
 router.use(bodyParser.urlencoded({extended: true}));
 
+// idea 1:
 // create if loop to run adding function vs removing function based on person.purpose
 // this should be inside of post function, as both POST functions send same basic request type
 // if add, then people.push purpose
@@ -15,7 +16,7 @@ router.post('/', function(req, res) {
     var person = {
         name: req.body.name,
         facts: req.body.facts,
-        idnumber: req.body.idnumber,
+        idNumber: req.body.idNumber,
         purpose: req.body.purpose
     };
 
@@ -30,19 +31,24 @@ router.post('/', function(req, res) {
         people.push(person);
     }
 
-    // else if (person.purpose == 'remove') {
-    //     for (var i = 0; i <people.length; i++) {
-    //         if (people[i].purpose == 'remove') {
-    //             people.pop(people[i]);
-    //         }
-    //     }
+    else if (person.purpose == 'remove') {
+        console.log('logging person in remove function ', person);
+        
+        for (var i = 0; i <people.length; i++) {
+            if (people[i].purpose == 'remove') {
+                people.pop(people[i]);
+            }
+            else if (people[i].idNumber == person.idNumber) {
+                people.pop(people[i]);
+            }
+        }
 
-        // people = people.filter(function(people) {
-        //     return (el.idnumber != req.body.idnumber);
-        // });
-        // console.log(people);
-        // res.send(people);
-    // }
+    //     people = people.filter(function(people) {
+    //         return (people.idNumber != req.body.idNumber);
+    //     });
+    //     console.log(people);
+    //     res.send(people);
+    }
 
     else {
         console.log('Invalid Person Object handled inside person.js');
